@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303154159) do
+ActiveRecord::Schema.define(version: 20170303204831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,9 +48,10 @@ ActiveRecord::Schema.define(version: 20170303154159) do
   create_table "posts", force: :cascade do |t|
     t.string   "message"
     t.integer  "user_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "likers_count", default: 0
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "likers_count",     default: 0
+    t.integer  "mentionees_count", default: 0
     t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
@@ -64,12 +65,11 @@ ActiveRecord::Schema.define(version: 20170303154159) do
     t.string   "email"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.integer  "post_count",       default: 0
     t.integer  "mentioners_count", default: 0
-    t.integer  "mentionees_count", default: 0
     t.integer  "followers_count",  default: 0
     t.integer  "followees_count",  default: 0
     t.integer  "likees_count",     default: 0
+    t.integer  "posts_count",      default: 0
   end
 
   add_foreign_key "posts", "users"
