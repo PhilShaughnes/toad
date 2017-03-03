@@ -2,7 +2,8 @@ class ApplicationController < ActionController::API
   private
 
   def request_error(msg, code = 400)
-    render json: {errors: msg.map{ |m| { error: m }}}, status: code
+    msg = [msg] unless msg.is_a?(Array)
+    render json: msg.map{ |m| { error: m }}, status: code
   end
 
   def current_user
@@ -10,7 +11,7 @@ class ApplicationController < ActionController::API
   end
 
   def require_user
-      request_error(["You need to be logged in to do this."], 401) unless current_user
+      request_error("You need to be logged in.", 401) unless current_user
   end
 
 end

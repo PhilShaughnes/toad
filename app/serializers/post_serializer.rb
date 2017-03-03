@@ -1,4 +1,8 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :message
-  has_one :user
+  attributes :created_at, :message, :username
+
+  def username
+    object.user.username
+  end
+
 end

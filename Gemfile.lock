@@ -130,6 +130,8 @@ GEM
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
     slop (3.6.0)
+    socialization (1.2.0)
+      activerecord
     spring (2.0.1)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -166,6 +168,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.0.2)
   shoulda
+  socialization
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
