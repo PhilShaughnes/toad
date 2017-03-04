@@ -7,7 +7,7 @@ class SocializeController < ApplicationController
     if user
       puts "followed!"
       current_user.toggle_follow!(user)
-      render json: [current_user, user, "followed!"]
+      render json: "follow status changed!"
     else
       request_error("not a user.")
     end
