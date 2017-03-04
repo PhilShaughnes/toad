@@ -22,6 +22,7 @@ class UsersController < ApplicationController
   end
 
   def login
+
     @user = User.find_by(username: params[:username])&.
               authenticate(params[:password])
     if @user
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    
+
   end
 
 

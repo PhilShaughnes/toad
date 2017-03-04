@@ -3,7 +3,7 @@ class Post < ApplicationRecord
 
   acts_as_likeable
 
-  validates :message, presence: true, length: { maximum: 160}
+  validates :message, presence: true, length: { minimum: 2, maximum: 160}
 
   def self.timeline(user)
     following_ids = user.followees(User).pluck(:id)

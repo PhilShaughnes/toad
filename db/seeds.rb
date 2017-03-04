@@ -5,18 +5,49 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-10.times do
-  user = User.create!(
-    username: Faker::Pokemon.unique.name,
-    first_name: Faker::Superhero.descriptor,
-    last_name: Faker::Superhero.suffix,
-    email: Faker::Internet.unique.email,
-    password: "password"
 
-  )
-  rand(1..5).times do
-    user.posts.create!(
-      message: Faker::ChuckNorris.fact
+
+def new_users
+  print "\nadding 10 new users: "
+  users = []
+  10.times do
+    print '.'
+    user = User.create!(
+      username: Faker::Pokemon.unique.name,
+      first_name: Faker::Superhero.descriptor,
+      last_name: Faker::Superhero.suffix,
+      email: Faker::Internet.unique.email,
+      password: "password"
     )
+    users << user
+  end
+  users
+end
+
+def new_posts(users)
+  print "\nchecking for posts: "
+  users.each do |user|
+    rand(1..5).times do
+      print '.'
+      user.posts.create!(
+        message: Faker::ChuckNorris.fact
+      )
+    end if user.posts_count < 2
   end
 end
+
+def new_follow(users)
+  print "\nmixing up some follows: "
+  users.each do |user|
+    rand(1..5).times do
+      print '.'
+      user.toggle_follow!(users.sample)
+     end
+  end
+end
+
+print "starting..."
+userslist = User.all.length < 10 ? new_users : User.all
+new_posts(userslist)
+new_follow(userslist)
+puts "\nDone."

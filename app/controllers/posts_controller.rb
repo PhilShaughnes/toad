@@ -3,11 +3,11 @@ class PostsController < ApplicationController
   before_action :require_user, only: [:create]
 
   def index
-    # if current_user
-    #   @post = Post.timeline(current_user)
-    # else
+    if current_user
+      @post = Post.timeline(current_user)
+    else
       @post = Post.all
-    # end
+    end
     render json: @post
   end
 
