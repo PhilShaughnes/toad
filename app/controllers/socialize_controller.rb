@@ -6,8 +6,8 @@ class SocializeController < ApplicationController
     user = User.find_by(username: params[:username])
     if user
       current_user.toggle_follow!(user)
-      message = {message: "follow status changed!"}
-      render json: message
+      message = current_user.follows?(user) ? "followed" : "unfollowed"
+      render json: {result: message}
     else
       request_error("not a user.")
     end
