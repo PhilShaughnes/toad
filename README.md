@@ -58,4 +58,6 @@ If you want to seed the database with fake data, you can run `rails db:seed`.
 - mentions
 - a better readme
 
+If you're really curious, the Heroku instance of the API is running here: <https://hidden-plains-75908.herokuapp.com>
+
 <!-- ### Signup Route: `post` request to `/users` Requires: - username - password - first_name - last_name - email Success returns the created user in JSON with a token. Failure returns errors. messages. ### Login Route: `post` request to `/login` Requires: - username - password Success returns the user in JSON with a token. Failure returns an error message. For loggout, front-end simply needs to clear the token. ### Timeline Route: `get` request to `/posts` with a token, returns the timeline. without a token, returns all posts. each post includes the message, username, and photo_url (avatar). ### Posts Route: ### Profile/Other users ### Search ### Follow/Unfollow -->
