@@ -2,15 +2,6 @@ class UsersController < ApplicationController
 
   before_action :require_user, only: [:show, :index]
 
-  # def index
-  #   @user = User.all
-  #   if params[:search]
-  #     @user = User.search(params[:search]).order("created_at DESC")
-  #   else
-  #     @user = User.all.order("created_at DESC")
-  #   end
-  #   render json: @user
-  # end
 
   def index
     if params[:search]

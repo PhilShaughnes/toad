@@ -12,26 +12,50 @@ If you want to seed the database with fake data, you can run `rails db:seed`.
 
 `db:seed`, unless edited, will ensure you have at least 10 users in the database. Each user will have a few posts and should have a few followers and followees. They also should have avatar photos. Each of these is easily changed in the `seeds.rb` file. Simply comment/uncomment the method you with to include/exclude.
 
-## Routes and Endpoints
+## Features
 
-Post /users
+### summary:
 
-Things you may want to cover:
+- users can signup or login
+- without signing up or in, a user can see all posts chronologically.
+- A logged in user can:
 
-- Ruby version
+  - see a timeline of their posts and those of anyone they follow.
+  - make posts.
+  - search for users or posts.
+  - see their own profile.
+  - see all posts by specific users.
+  - follow/unfollow other users.
 
-- System dependencies
+### Route Summary
 
-- Configuration
+- `post /users` - signup
 
-- Database creation
+- `post /login` - login
 
-- Database initialization
+- `post /posts` - create a post (token required)
 
-- How to run the test suite
+- `get /users` - see a list of all users (token required)
 
-- Services (job queues, cache servers, search engines, etc.)
+- `get /users` - search for users and posts (token and :search parameter required)
 
-- Deployment instructions
+- `get /posts` - see a list of all posts (no token)
 
-- ...
+- `get /posts` - see timeline (token required)
+
+- `get /users/profile` - see your profile (token required)
+
+- `get /users/:id` - see the profile of a specific user (token required)
+
+- `get /post/:user_id` - see all the posts for a specific user (token required)
+
+- `post /socialize/follow` - toggle the follow status of a for the current user, of a specific user (requires a token and a username as parameters)
+
+### Unfinished Features
+
+- robust testing ( or any testing)
+- likes
+- mentions
+- a better readme
+
+<!-- ### Signup Route: `post` request to `/users` Requires: - username - password - first_name - last_name - email Success returns the created user in JSON with a token. Failure returns errors. messages. ### Login Route: `post` request to `/login` Requires: - username - password Success returns the user in JSON with a token. Failure returns an error message. For loggout, front-end simply needs to clear the token. ### Timeline Route: `get` request to `/posts` with a token, returns the timeline. without a token, returns all posts. each post includes the message, username, and photo_url (avatar). ### Posts Route: ### Profile/Other users ### Search ### Follow/Unfollow -->
