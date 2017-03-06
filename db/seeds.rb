@@ -27,6 +27,7 @@ end
 def new_photo_url(users)
   users.each do |user|
     user.photo_url = Faker::Avatar.image
+    user.save
   end
 end
 
