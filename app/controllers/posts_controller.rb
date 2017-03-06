@@ -15,7 +15,7 @@ class PostsController < ApplicationController
 
   def create
     p params
-    @post = Post.new(:message)
+    @post = Post.new({message: params[:message]})
     current_user.posts << @post
     if @post.save
       render json: @post
