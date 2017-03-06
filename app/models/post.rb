@@ -10,4 +10,8 @@ class Post < ApplicationRecord
     all_ids= following_ids << user.id
     Post.where(user_id: all_ids).order("created_at DESC")
   end
+
+  def self.search(search)
+    where("message LIKE ?", "%#{search}%")
+  end
 end

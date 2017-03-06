@@ -3,14 +3,14 @@ class PostsController < ApplicationController
   before_action :require_user, only: [:create]
 
   def index
-    @post = case
-    when params[:user_id] then User.find(params[:user_id]).posts
-    when current_user then Post.timeline(current_user)
-    else Post.order("created_at DESC")
-    end
+    @post = current_user ? Post.timeline(current_user) : Post.order("created_at DESC")
     render json: @post
   end
 
+  def show
+    @post = User.find(params[:id]).posts
+    render json: @post
+  end
   #   if current_user
   #     @post = Post.timeline(current_user)
   #   else
@@ -21,19 +21,13 @@ class PostsController < ApplicationController
 
   def create
     p params
-    @post = Post.new(post_params)
+    @post = Post.new(:message)
     current_user.posts << @post
     if @post.save
       render json: @post
-      #render json: Post.all
-      #TODO: just render @post here
     else
       request_error(@post.errors.full_messages)
     end
-  end
-
-  def post_params
-    params.permit(:message)
   end
 
 end

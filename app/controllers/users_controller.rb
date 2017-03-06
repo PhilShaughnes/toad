@@ -2,8 +2,24 @@ class UsersController < ApplicationController
 
   before_action :require_user, only: [:show, :index]
 
+  # def index
+  #   @user = User.all
+  #   if params[:search]
+  #     @user = User.search(params[:search]).order("created_at DESC")
+  #   else
+  #     @user = User.all.order("created_at DESC")
+  #   end
+  #   render json: @user
+  # end
+
   def index
-    @user = User.all
+    if params[:search]
+      user_results = User.search(params[:search]).order("created_at DESC")
+      post_results = Post.search(params[:search]).order("created_at DESC")
+      @user = (user_results + post_results).sort{|a,b| b.created_at <=> a.created_at}
+    else
+      @user = User.order("created_at DESC")
+    end
     render json: @user
   end
 

@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+# This method adds 10 new users
 def new_users
   print "\nadding 10 new users: "
   users = []
@@ -24,13 +25,18 @@ def new_users
   users
 end
 
+#This method adds avatar urls to users who have none.
+# Note: Users created manually through the web interface will have an empty string for their avatar. This will not update those.
 def new_photo_url(users)
+  print "\nUpdating NULL avatar (Note: empty strings will not be updated): "
   users.each do |user|
-    user.photo_url = Faker::Avatar.image
+    print '.'
+    user.photo_url ||= Faker::Avatar.image
     user.save
   end
 end
 
+#This method adds between 1 and 5 posts for any users that have less than 2 posts.
 def new_posts(users)
   print "\nchecking for posts: "
   users.each do |user|
@@ -43,6 +49,7 @@ def new_posts(users)
   end
 end
 
+#this method toggles the follow status of between 1 to 5 users for each user.
 def new_follow(users)
   print "\nmixing up some follows: "
   users.each do |user|
@@ -54,6 +61,9 @@ def new_follow(users)
 end
 
 print "starting..."
+
+#run the methods here.
+# this runs new_users if there are less than 10 users in the database.
 userslist = User.all.length < 10 ? new_users : User.all
 new_posts(userslist)
 new_follow(userslist)
