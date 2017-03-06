@@ -56,4 +56,5 @@ print "starting..."
 userslist = User.all.length < 10 ? new_users : User.all
 new_posts(userslist)
 new_follow(userslist)
+new_photo_url(userslist)
 puts "\nDone."
