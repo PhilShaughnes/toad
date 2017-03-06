@@ -24,6 +24,12 @@ def new_users
   users
 end
 
+def new_photo_url(users)
+  users.each do |user|
+    user.photo_url ||= Faker::Avatar.image
+  end
+end
+
 def new_posts(users)
   print "\nchecking for posts: "
   users.each do |user|

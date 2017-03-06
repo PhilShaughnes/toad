@@ -8,8 +8,18 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(username: params[:username])
-    render json: @user
+    p params
+    if params[:id].downcase == "profile"
+      @user = current_user
+    else
+      @user = User.find(params[:id])
+    end
+
+    if @user
+      render json: @user
+    else
+      request_error("User not found")
+    end
   end
 
   def create
@@ -36,9 +46,9 @@ class UsersController < ApplicationController
 
   end
 
-  def show
-    render json: User.find(params[:id])
-  end
+  # def show
+  #   render json: User.find(params[:id])
+  # end
 
 
   private
