@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_user, only: [:show, :index]
+  # before_action :require_user, only: [:show, :index]
 
 
   def index
